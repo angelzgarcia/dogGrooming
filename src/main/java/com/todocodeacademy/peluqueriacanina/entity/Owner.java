@@ -1,15 +1,16 @@
 package com.todocodeacademy.peluqueriacanina.entity;
 
-import javax.persistence.Basic;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
+import java.io.Serializable;
+import jakarta.persistence.Basic;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+ 
 @Entity
 @Table(name = "owners")
-public class Owner {
+public class Owner implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,9 +42,14 @@ public class Owner {
     public void setContact(String contact) { this.contact = contact; }
 
     @Override
-    public String toString() 
-    {
-        return "Owner{" + "id=" + id + ", name=" + name + ", contact=" + contact + '}';
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Owner{");
+        sb.append("id=").append(id);
+        sb.append(", name=").append(name);
+        sb.append(", contact=").append(contact);
+        sb.append('}');
+        return sb.toString();
     }
-    
+
 }

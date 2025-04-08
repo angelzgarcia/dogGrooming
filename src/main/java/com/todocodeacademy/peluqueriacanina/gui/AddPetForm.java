@@ -1,14 +1,23 @@
 package com.todocodeacademy.peluqueriacanina.gui;
 
+import com.todocodeacademy.peluqueriacanina.entity.PersistenceEntity;
 import java.awt.Component;
 import java.awt.Container;
-import javax.swing.JComboBox;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.JViewport;
 
 
 public class AddPetForm extends javax.swing.JFrame {
+    PersistenceEntity persistenceEntity = new PersistenceEntity();
 
     public AddPetForm() {
         initComponents();
@@ -53,18 +62,26 @@ public class AddPetForm extends javax.swing.JFrame {
 
         petName.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 0, true));
         petName.setMinimumSize(new java.awt.Dimension(64, 26));
+        petName.setName("petName"); // NOI18N
         petName.setPreferredSize(new java.awt.Dimension(64, 26));
 
         petRaceLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         petRaceLabel.setText("Raza");
 
         petRace.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 0, true));
+        petRace.setName("petRace"); // NOI18N
         petRace.setPreferredSize(new java.awt.Dimension(64, 26));
+        petRace.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                petRaceActionPerformed(evt);
+            }
+        });
 
         petColorLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         petColorLabel.setText("Color");
 
         petColor.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 0, true));
+        petColor.setName("petColor"); // NOI18N
         petColor.setPreferredSize(new java.awt.Dimension(64, 26));
 
         isAllergicLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -77,12 +94,14 @@ public class AddPetForm extends javax.swing.JFrame {
         ownerNameLabel.setText("Nombre del dueño");
 
         ownerName.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 0, true));
+        ownerName.setName("ownerName"); // NOI18N
         ownerName.setPreferredSize(new java.awt.Dimension(64, 26));
 
         ownerContactLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         ownerContactLabel.setText("Contacto del dueño");
 
         ownerContact.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 0, true));
+        ownerContact.setName("ownerContact"); // NOI18N
         ownerContact.setPreferredSize(new java.awt.Dimension(64, 26));
 
         observationsLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -91,10 +110,12 @@ public class AddPetForm extends javax.swing.JFrame {
         observations.setColumns(20);
         observations.setRows(5);
         observations.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 0, true));
+        observations.setName("observations"); // NOI18N
         jScrollPane1.setViewportView(observations);
 
         groupIsAllergic.add(isAllergic);
-        isAllergic.setText("Sí");
+        isAllergic.setText("Si");
+        isAllergic.setName("isAllergic"); // NOI18N
         isAllergic.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 isAllergicActionPerformed(evt);
@@ -104,6 +125,7 @@ public class AddPetForm extends javax.swing.JFrame {
         groupIsAllergic.add(isNotAllergic);
         isNotAllergic.setSelected(true);
         isNotAllergic.setText("No");
+        isNotAllergic.setName("isNotAllergic"); // NOI18N
         isNotAllergic.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 isNotAllergicActionPerformed(evt);
@@ -111,11 +133,13 @@ public class AddPetForm extends javax.swing.JFrame {
         });
 
         groupIsSpecialAttention.add(isSpecialAttention);
-        isSpecialAttention.setText("Sí");
+        isSpecialAttention.setText("Si");
+        isSpecialAttention.setName("isSpecialAttention"); // NOI18N
 
         groupIsSpecialAttention.add(isNotSpecialAttention);
         isNotSpecialAttention.setSelected(true);
         isNotSpecialAttention.setText("No");
+        isNotSpecialAttention.setName("isNotSpecialAttention"); // NOI18N
 
         javax.swing.GroupLayout formContainerAddPetLayout = new javax.swing.GroupLayout(formContainerAddPet);
         formContainerAddPet.setLayout(formContainerAddPetLayout);
@@ -134,11 +158,11 @@ public class AddPetForm extends javax.swing.JFrame {
                         .addComponent(petColor, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, formContainerAddPetLayout.createSequentialGroup()
                         .addComponent(ownerNameLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(ownerName, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, formContainerAddPetLayout.createSequentialGroup()
                         .addComponent(petRaceLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 138, Short.MAX_VALUE)
                         .addComponent(petRace, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, formContainerAddPetLayout.createSequentialGroup()
                         .addGroup(formContainerAddPetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -293,20 +317,58 @@ public class AddPetForm extends javax.swing.JFrame {
     }//GEN-LAST:event_isNotAllergicActionPerformed
 
     private void addPetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPetButtonActionPerformed
-        // TODO add your handling code here:
+        persistenceEntity.storePet(collectFormData(formContainerAddPet));
+        
+        JOptionPane alert = new JOptionPane("¡Registro exitoso!");
+        alert.setMessageType(JOptionPane.INFORMATION_MESSAGE);
+        JDialog text = alert.createDialog("Guardado");
+        text.setAlwaysOnTop(true);
+        text.setVisible(true);
+        
+        resetAddPetFormButtonActionPerformed(evt);
     }//GEN-LAST:event_addPetButtonActionPerformed
 
     private void resetAddPetFormButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetAddPetFormButtonActionPerformed
-        for (Component component : formContainerAddPet.getComponents()) 
-            if (component instanceof JTextField) 
-                ((JTextField) component).setText("");
-            else if (component instanceof JTextArea) 
-                ((JTextArea) component).setText("");
-            else if (component instanceof JRadioButton)
-                ((JRadioButton) component).setSelected(true);
-        
+        Arrays.asList(formContainerAddPet.getComponents()).stream().forEach(c -> {
+            if (c instanceof JTextField tf) 
+                tf.setText("");
+            else if (c instanceof JTextArea ta) 
+                ta.setText("");
+            else if (c instanceof JScrollPane sp) 
+                Arrays.asList(((JViewport) sp.getComponent(0)).getComponents()).stream().forEach(cp -> {
+                    if (cp instanceof JTextArea ta) 
+                        ta.setText("");
+                });
+            else if (c instanceof JRadioButton rb)
+                rb.setSelected(true);
+        });
     }//GEN-LAST:event_resetAddPetFormButtonActionPerformed
 
+    private void petRaceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_petRaceActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_petRaceActionPerformed
+
+    private Map<String, String> collectFormData(JPanel formContainer)
+    {
+        Map<String, String> formData = new HashMap<>();
+    
+        Arrays.asList(formContainer.getComponents()).stream().forEach(c -> {
+            if (c instanceof JTextField tf) 
+                formData.put(tf.getName(), tf.getText());
+            else if (c instanceof JTextArea ta) 
+                formData.put(ta.getName(), ta.getText());
+            else if (c instanceof JScrollPane sp) 
+                Arrays.asList(((JViewport) sp.getComponent(0)).getComponents()).stream().forEach(cp -> {
+                    if (cp instanceof JTextArea ta) 
+                        formData.put(ta.getName(), ta.getText());
+                });
+            else if (c instanceof JRadioButton rb) 
+                if (rb.isSelected()) 
+                    formData.put(rb.getName(), rb.getText());
+        });
+        
+        return formData;
+    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addPetButton;
